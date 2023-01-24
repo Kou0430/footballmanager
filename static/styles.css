@@ -1,0 +1,61 @@
+body {
+    background-image: url("http://putiya.com/img/sport/soccer01/soccer01_b_09.png");
+    background-position:left bottom;
+    background-size: cover;
+}
+
+nav navbg
+{
+    color: #ffffff
+}
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+    font-family: 'Impact', cursive;
+}
+
+nav .navbar-brand2
+{
+    font-size: large;
+    font-family: 'Impact', cursive;
+}
+
+nav .navbar-brand2 .blue
+{
+    color: #191970;
+}
+
+/* Colors for brand */
+nav .navbar-brand .blue
+{
+    color: #191970;
+}
+nav .navbar-brand .red
+{
+    color: #dc143c;
+}
+nav .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+nav .navbar-brand .green
+{
+    color: #2e944b;
+}
+
+.yoko
+{
+    display: flex;
+}
+
+.tate
+{
+    display: block;
+}
+
+.wide
+{
+    margin-right: auto;
+    margin-left: auto;
+}
