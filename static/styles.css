@@ -4,6 +4,13 @@ body {
     background-size: cover;
 }
 
+.box {
+  width: 100%;
+  height: 600px;
+  background-size: 300px; 185px;
+  background: linear-gradient(90deg, #00008b, #dc143c);
+}
+
 nav navbg
 {
     color: #ffffff
@@ -58,4 +65,9 @@ nav .navbar-brand .green
 {
     margin-right: auto;
     margin-left: auto;
+}
+
+.username-btn
+{
+background-color: yellow;
 }
