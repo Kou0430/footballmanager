@@ -42,7 +42,8 @@ def login():
         cur.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
         result = cur.fetchall()
         # Check username and password
-        if len(result) != 1 or not check_password_hash(result[0][2], request.form.get("password")):  # result[0][2] is hashed password
+        # result[0][2] is hashed password
+        if len(result) != 1 or not check_password_hash(result[0][2], request.form.get("password")):
             return apology("invalid username and password", 403)
 
         # Remember username
@@ -111,8 +112,6 @@ def register():
 
     else:
         return render_template("register.html")
-
-
 
 
 conn.close()
