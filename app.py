@@ -5,6 +5,7 @@ from helperFunction import login_required, sorry
 from werkzeug.security import check_password_hash, generate_password_hash
 
 
+
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
@@ -112,7 +113,23 @@ def register():
         return render_template("register.html")
 
 
+@app.route("/create433", methods=["GET"])
+@login_required
+def create():
+    if request.method == "GET":
+        squad = db.execute("SELECT * FROM players LIMIT 14")
+        return render_template("create433.html", squad=squad)
+
+
 @app.route("/create433", methods=["GET", "POST"])
 @login_required
 def set_squad():
-    return render_template("create433.html")
+    if request.method == "POST":
+        if request.form.get("symbol1"):
+            imagedic = db.execute("SELECT image FROM players WHERE name = ?", request.form.get("symbol1"))
+            # この表記重要！DBからとるときは要素が辞書型のリスト型担ってることに注意
+            image1 = imagedic[0]['image']
+            return render_template("create433.html", image1=image1)
+        session.clear()
+        return render_template("register.html")
+
