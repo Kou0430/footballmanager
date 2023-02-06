@@ -15,9 +15,11 @@ app.permanent_session_lifetime = timedelta(minutes=10)
 db = SQL("sqlite:///playersData.db")
 
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 @login_required
 def index():
+    if request.method == "POST":
+        return render_template("create433.html")
     return render_template("index.html")
 
 
@@ -109,3 +111,8 @@ def register():
     else:
         return render_template("register.html")
 
+
+@app.route("/create433", methods=["GET", "POST"])
+@login_required
+def set_squad():
+    return render_template("create433.html")
