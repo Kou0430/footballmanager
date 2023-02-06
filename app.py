@@ -1,8 +1,8 @@
 from flask import Flask, render_template, session, request, redirect
+from cs50 import SQL
 from datetime import timedelta
 from helpers import login_required, apology
 from werkzeug.security import check_password_hash, generate_password_hash
-import sqlite3
 
 
 app = Flask(__name__)
@@ -12,8 +12,7 @@ app.secret_key = "abcde"
 app.permanent_session_lifetime = timedelta(minutes=10)
 
 # Connect to database
-conn = sqlite3.connect('playersData.db')
-cur = conn.cursor()
+db = SQL("sqlite:///playersData.db")
 
 
 @app.route('/')
@@ -39,15 +38,18 @@ def login():
             return apology("must provide password", 400)
 
         # Query database for username
-        cur.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
-        result = cur.fetchall()
+        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+
         # Check username and password
         # result[0][2] is hashed password
-        if len(result) != 1 or not check_password_hash(result[0][2], request.form.get("password")):
-            return apology("invalid username and password", 403)
+        if len(rows) != 1 or not check_password_hash(rows[0][2], request.form.get("password")):
+            return apology("invalid username and password", 400)
+
+        if request.form.get("password") != request.form.get("confirmation"):
+            return apology("passwords don't match", 400)
 
         # Remember username
-        session["user_id"] = result[0]["id"]
+        session["user_id"] = rows[0]["id"]
 
         # Redirect user to home page
         return redirect("/")
@@ -88,11 +90,10 @@ def register():
         confirmation = request.form.get("confirmation")
 
         # Query database for username
-        cur.execute("SELECT * FROM users WHERE username = ?", username)
-        result = cur.fetchall()
+        rows = db.execute("SELECT * FROM users WHERE username = ?", username)
 
         # Check username whether it is available or not
-        if len(result) != 0:
+        if len(rows) != 0:
             return apology("invalid username", 400)
 
         # Check whether confirmation fits password
@@ -100,18 +101,14 @@ def register():
             return apology("passwords don't match", 400)
 
         # New registering
-        cur.execute("INSERT INTO users(username, hash) VALUES(?, ?)", (username, generate_password_hash(password)))
-        conn.commit()
+        db.execute("INSERT INTO users(username, hash) VALUES(?, ?)", username, generate_password_hash(password))
 
         # start session
-        cur.execute("SELECT * FROM users WHERE username = ?", username)
-        result = cur.fetchall()
-        session["user_id"] = result[0][0]
+        row = db.execute("SELECT * FROM users WHERE username = ?", username)
+        session["user_id"] = row[0][0]
 
         redirect("/")
 
     else:
         return render_template("register.html")
 
-
-conn.close()
