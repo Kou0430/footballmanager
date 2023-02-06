@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, request, redirect
 from cs50 import SQL
 from datetime import timedelta
-from helpers import login_required, apology
+from helperFunction import login_required, sorry
 from werkzeug.security import check_password_hash, generate_password_hash
 
 
@@ -31,22 +31,19 @@ def login():
 
         # Check username
         if not request.form.get("username"):
-            return apology("must provide username", 400)
+            return sorry("must provide username", 400)
 
         # Check password
         if not request.form.get("password"):
-            return apology("must provide password", 400)
+            return sorry("must provide password", 400)
 
         # Query database for username
         rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
         # Check username and password
         # result[0][2] is hashed password
-        if len(rows) != 1 or not check_password_hash(rows[0][2], request.form.get("password")):
-            return apology("invalid username and password", 400)
-
-        if request.form.get("password") != request.form.get("confirmation"):
-            return apology("passwords don't match", 400)
+        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+            return sorry("invalid username and password", 400)
 
         # Remember username
         session["user_id"] = rows[0]["id"]
@@ -79,11 +76,11 @@ def register():
 
         # Ensure submit
         if not request.form.get("username"):
-            return apology("must provide username", 400)
+            return sorry("must provide username", 400)
         elif not request.form.get("password"):
-            return apology("must provide password", 400)
+            return sorry("must provide password", 400)
         elif not request.form.get("confirmation"):
-            return apology("must provide confirmation", 400)
+            return sorry("must provide confirmation", 400)
 
         username = request.form.get("username")
         password = request.form.get("password")
@@ -94,20 +91,20 @@ def register():
 
         # Check username whether it is available or not
         if len(rows) != 0:
-            return apology("invalid username", 400)
+            return sorry("invalid username", 400)
 
         # Check whether confirmation fits password
         if confirmation != password:
-            return apology("passwords don't match", 400)
+            return sorry("passwords don't match", 400)
 
         # New registering
         db.execute("INSERT INTO users(username, hash) VALUES(?, ?)", username, generate_password_hash(password))
 
         # start session
         row = db.execute("SELECT * FROM users WHERE username = ?", username)
-        session["user_id"] = row[0][0]
+        session["user_id"] = row[0]["id"]
 
-        redirect("/")
+        return redirect("/")
 
     else:
         return render_template("register.html")

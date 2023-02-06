@@ -11,7 +11,7 @@ def login_required(f):
     return decorated_function
 
 
-def apology(message, code=400):
+def sorry(message, code=400):
 
     def escape(s):
 
