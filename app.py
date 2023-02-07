@@ -114,9 +114,10 @@ def register():
         return render_template("register.html")
 
 
+# create433------------------------------
 @app.route("/create433", methods=["GET"])
 @login_required
-def create():
+def create433():
     if request.method == "GET":
         squad = db.execute("SELECT * FROM players LIMIT 40")  # ！！！！ここは後で改善
         check = db.execute("SELECT * FROM squads WHERE username = ?", session["user_id"])
@@ -128,15 +129,9 @@ def create():
 
 @app.route("/create433", methods=["GET", "POST"])
 @login_required
-def set_squad():
+def set_squad433():
     if request.method == "POST":
-        '''
-        if request.form.get("symbol1"):
-            imagedic = db.execute("SELECT image FROM players WHERE name = ?", request.form.get("symbol1"))
-            # 以下の表記重要！DBからとるときは要素が辞書型のリストになってることに注意
-            image1 = imagedic[0]['image']
-            return render_template("create433.html", image1=image1, image2=image2)
-        '''
+
         mysquad = db.execute("SELECT * FROM squads WHERE username = ?", session["user_id"])
         for i in range(20):  # 11人なので11にしようと思ったらなぜかout of rangeでたので多めにしてる
             if request.form.get("symbol{num}".format(num=i)):
@@ -145,6 +140,72 @@ def set_squad():
                 squadlist[i-1] = imagedict[0]['image']
 
         return render_template("create433.html", squad=mysquad, image1=squadlist[0], image2=squadlist[1],
+                               image3=squadlist[2], image4=squadlist[3], image5=squadlist[4], image6=squadlist[5],
+                               image7=squadlist[6], image8=squadlist[7], image9=squadlist[8], image10=squadlist[9],
+                               image11=squadlist[10])
+
+    return render_template("register.html")
+
+
+# create442------------------------------------
+@app.route("/create442", methods=["GET"])
+@login_required
+def create442():
+    if request.method == "GET":
+        squad = db.execute("SELECT * FROM players LIMIT 40")  # ！！！！ここは後で改善
+        check = db.execute("SELECT * FROM squads WHERE username = ?", session["user_id"])
+        if len(check) == 0:
+            for i in range(40):
+                db.execute("INSERT INTO squads(username, name) VALUES(?, ?)", session["user_id"], squad[i]["name"])
+        return render_template("create442.html", squad=squad)
+
+
+@app.route("/create442", methods=["GET", "POST"])
+@login_required
+def set_squad442():
+    if request.method == "POST":
+
+        mysquad = db.execute("SELECT * FROM squads WHERE username = ?", session["user_id"])
+        for i in range(20):  # 11人なので11にしようと思ったらなぜかout of rangeでたので多めにしてる
+            if request.form.get("symbol{num}".format(num=i)):
+                imagedict = db.execute("SELECT image FROM players WHERE name = ?",
+                                       request.form.get("symbol{num}".format(num=i)))
+                squadlist[i-1] = imagedict[0]['image']
+
+        return render_template("create442.html", squad=mysquad, image1=squadlist[0], image2=squadlist[1],
+                               image3=squadlist[2], image4=squadlist[3], image5=squadlist[4], image6=squadlist[5],
+                               image7=squadlist[6], image8=squadlist[7], image9=squadlist[8], image10=squadlist[9],
+                               image11=squadlist[10])
+
+    return render_template("register.html")
+
+
+# create352------------------------------
+@app.route("/create352", methods=["GET"])
+@login_required
+def create352():
+    if request.method == "GET":
+        squad = db.execute("SELECT * FROM players LIMIT 40")  # ！！！！ここは後で改善
+        check = db.execute("SELECT * FROM squads WHERE username = ?", session["user_id"])
+        if len(check) == 0:
+            for i in range(40):
+                db.execute("INSERT INTO squads(username, name) VALUES(?, ?)", session["user_id"], squad[i]["name"])
+        return render_template("create352.html", squad=squad)
+
+
+@app.route("/create352", methods=["GET", "POST"])
+@login_required
+def set_squad352():
+    if request.method == "POST":
+
+        mysquad = db.execute("SELECT * FROM squads WHERE username = ?", session["user_id"])
+        for i in range(20):  # 11人なので11にしようと思ったらなぜかout of rangeでたので多めにしてる
+            if request.form.get("symbol{num}".format(num=i)):
+                imagedict = db.execute("SELECT image FROM players WHERE name = ?",
+                                       request.form.get("symbol{num}".format(num=i)))
+                squadlist[i-1] = imagedict[0]['image']
+
+        return render_template("create352.html", squad=mysquad, image1=squadlist[0], image2=squadlist[1],
                                image3=squadlist[2], image4=squadlist[3], image5=squadlist[4], image6=squadlist[5],
                                image7=squadlist[6], image8=squadlist[7], image9=squadlist[8], image10=squadlist[9],
                                image11=squadlist[10])

@@ -1,12 +1,12 @@
 {% extends "court-layout.html" %}
 
 {% block title %}
-    Create433
+    Create442
 {% endblock %}
 
 {% block main %}
 
-        <form action="/create433" method="post">
+        <form action="/create442" method="post">
             <div class="w-50 mb-5 mt-5 yoko wide">
                 <div class="tate wide">
                     <img src="{{ image1 }}">
@@ -31,6 +31,11 @@
                     <button class="btn btn-primary" type="submit">SELECT!</button>
                 </div>
 
+            </div>
+
+
+            <div class="w-75 py-5 yoko wide">
+
                 <div class="tate wide">
                     <img src="{{ image3 }}">
                     <select class="form-select mx-auto w-auto" name="symbol3">
@@ -42,10 +47,6 @@
                     <button class="btn btn-primary" type="submit">SELECT!</button>
                 </div>
 
-            </div>
-
-
-            <div class="w-50 py-5 yoko wide">
                 <div class="tate wide">
                     <img src="{{ image4 }}">
                     <select class="form-select mx-auto w-auto" name="symbol4">
