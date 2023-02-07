@@ -1,10 +1,9 @@
-import sqlite3
+from cs50 import SQL
 
-conn = sqlite3.connect('C:/Users/hcr_t/PycharmProjects/pythonProject/finalproject/footballmanager/users.db')
-cur = conn.cursor()
+li = [""] * 11
+print(li)
 
-cur.execute("CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, username STRING, \
-             hash STRING)")
+for i in range(11):
+    li[i] = "{i}".format(i=i)
 
-conn.commit()
-conn.close()
+print(li)

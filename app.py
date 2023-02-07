@@ -5,7 +5,6 @@ from helperFunction import login_required, sorry
 from werkzeug.security import check_password_hash, generate_password_hash
 
 
-
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
@@ -14,6 +13,8 @@ app.permanent_session_lifetime = timedelta(minutes=10)
 
 # Connect to database
 db = SQL("sqlite:///playersData.db")
+
+squadlist = [''] * 20  # １１人なので１１にしようとしたらout of rangeでた、なぜ
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -117,7 +118,11 @@ def register():
 @login_required
 def create():
     if request.method == "GET":
-        squad = db.execute("SELECT * FROM players LIMIT 14")
+        squad = db.execute("SELECT * FROM players LIMIT 40")  # ！！！！ここは後で改善
+        check = db.execute("SELECT * FROM squads WHERE username = ?", session["user_id"])
+        if len(check) == 0:
+            for i in range(40):
+                db.execute("INSERT INTO squads(username, name) VALUES(?, ?)", session["user_id"], squad[i]["name"])
         return render_template("create433.html", squad=squad)
 
 
@@ -125,11 +130,23 @@ def create():
 @login_required
 def set_squad():
     if request.method == "POST":
+        '''
         if request.form.get("symbol1"):
             imagedic = db.execute("SELECT image FROM players WHERE name = ?", request.form.get("symbol1"))
-            # この表記重要！DBからとるときは要素が辞書型のリスト型担ってることに注意
+            # 以下の表記重要！DBからとるときは要素が辞書型のリストになってることに注意
             image1 = imagedic[0]['image']
-            return render_template("create433.html", image1=image1)
-        session.clear()
-        return render_template("register.html")
+            return render_template("create433.html", image1=image1, image2=image2)
+        '''
+        mysquad = db.execute("SELECT * FROM squads WHERE username = ?", session["user_id"])
+        for i in range(20):  # 11人なので11にしようと思ったらなぜかout of rangeでたので多めにしてる
+            if request.form.get("symbol{num}".format(num=i)):
+                imagedict = db.execute("SELECT image FROM players WHERE name = ?",
+                                       request.form.get("symbol{num}".format(num=i)))
+                squadlist[i-1] = imagedict[0]['image']
 
+        return render_template("create433.html", squad=mysquad, image1=squadlist[0], image2=squadlist[1],
+                               image3=squadlist[2], image4=squadlist[3], image5=squadlist[4], image6=squadlist[5],
+                               image7=squadlist[6], image8=squadlist[7], image9=squadlist[8], image10=squadlist[9],
+                               image11=squadlist[10])
+
+    return render_template("register.html")

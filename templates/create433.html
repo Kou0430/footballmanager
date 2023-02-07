@@ -32,97 +32,113 @@
                 </div>
 
                 <div class="tate wide">
-                    <img src="https://cdn.sofifa.net/players/158/023/23_60.png">
-                    <select class="form-select mx-auto w-auto" name="symbol">
+                    <img src="{{ image3 }}">
+                    <select class="form-select mx-auto w-auto" name="symbol3">
                         <option disabled selected>FW</option>
-                        <option value="messi">Messi</option>
+                        {% for player in squad %}
+                            <option value="{{ player.name }}">{{ player.name }}</option>
+                        {% endfor %}
                     </select>
+                    <button class="btn btn-primary" type="submit">SELECT!</button>
                 </div>
+
             </div>
 
 
             <div class="w-50 py-5 yoko wide">
                 <div class="tate wide">
-                    <img src="https://cdn.sofifa.net/players/158/023/23_60.png">
-                    <select class="form-select mx-auto w-auto" name="symbol">
+                    <img src="{{ image4 }}">
+                    <select class="form-select mx-auto w-auto" name="symbol4">
                         <option disabled selected>MF</option>
-                        <option value="messi">Messi</option>
+                        {% for player in squad %}
+                            <option value="{{ player.name }}">{{ player.name }}</option>
+                        {% endfor %}
                     </select>
+                    <button class="btn btn-primary" type="submit">SELECT!</button>
                 </div>
 
                 <div class="tate wide">
-                    <img src="https://cdn.sofifa.net/players/158/023/23_60.png">
-                    <select class="form-select mx-auto w-auto" name="symbol">
+                    <img src="{{ image5 }}">
+                    <select class="form-select mx-auto w-auto" name="symbol5">
                         <option disabled selected>MF</option>
-                        <option value="messi">Messi</option>
+                        {% for player in squad %}
+                            <option value="{{ player.name }}">{{ player.name }}</option>
+                        {% endfor %}
                     </select>
+                    <button class="btn btn-primary" type="submit">SELECT!</button>
                 </div>
 
                 <div class="tate wide">
-                    <img src="https://cdn.sofifa.net/players/158/023/23_60.png">
-                    <select class="form-select mx-auto w-auto" name="symbol">
+                    <img src="{{ image6 }}">
+                    <select class="form-select mx-auto w-auto" name="symbol6">
                         <option disabled selected>MF</option>
-                        <option value="messi">Messi</option>
+                        {% for player in squad %}
+                            <option value="{{ player.name }}">{{ player.name }}</option>
+                        {% endfor %}
                     </select>
+                    <button class="btn btn-primary" type="submit">SELECT!</button>
                 </div>
             </div>
 
 
             <div class="w-50 mt-5 mb-5 yoko wide">
                 <div class="tate wide">
-                    <img src="https://cdn.sofifa.net/players/158/023/23_60.png">
-                    <select class="form-select mx-auto w-auto" name="symbol">
+                    <img src="{{ image7 }}">
+                    <select class="form-select mx-auto w-auto" name="symbol7">
                         <option disabled selected>DF</option>
-                        <option value="messi">Messi</option>
+                        {% for player in squad %}
+                            <option value="{{ player.name }}">{{ player.name }}</option>
+                        {% endfor %}
                     </select>
+                    <button class="btn btn-primary" type="submit">SELECT!</button>
                 </div>
 
                 <div class="tate wide">
-                    <img src="https://cdn.sofifa.net/players/158/023/23_60.png">
-                    <select class="form-select mx-auto w-auto" name="symbol">
+                    <img src="{{ image8 }}">
+                    <select class="form-select mx-auto w-auto" name="symbol8">
                         <option disabled selected>DF</option>
-                        <option value="messi">Messi</option>
+                        {% for player in squad %}
+                            <option value="{{ player.name }}">{{ player.name }}</option>
+                        {% endfor %}
                     </select>
+                    <button class="btn btn-primary" type="submit">SELECT!</button>
                 </div>
 
                 <div class="tate wide">
-                    <img src="https://cdn.sofifa.net/players/158/023/23_60.png">
-                    <select class="form-select mx-auto w-auto" name="symbol">
+                    <img src="{{ image9 }}">
+                    <select class="form-select mx-auto w-auto" name="symbol9">
                         <option disabled selected>DF</option>
-                        <option value="messi">Messi</option>
+                        {% for player in squad %}
+                            <option value="{{ player.name }}">{{ player.name }}</option>
+                        {% endfor %}
                     </select>
+                    <button class="btn btn-primary" type="submit">SELECT!</button>
                 </div>
 
                 <div class="tate wide">
-                    <img src="https://cdn.sofifa.net/players/158/023/23_60.png">
-                    <select class="form-select mx-auto w-auto" name="symbol">
+                    <img src="{{ image10 }}">
+                    <select class="form-select mx-auto w-auto" name="symbol10">
                         <option disabled selected>DF</option>
-                        <option value="messi">Messi</option>
+                        {% for player in squad %}
+                            <option value="{{ player.name }}">{{ player.name }}</option>
+                        {% endfor %}
                     </select>
+                    <button class="btn btn-primary" type="submit">SELECT!</button>
                 </div>
+
             </div>
 
-
-            <div class="w-50 mt-5 mb-5 yoko wide">
-                <div class="tate wide">
-                    <img src="https://cdn.sofifa.net/players/158/023/23_60.png">
-                    <select class="form-select mx-auto w-auto" name="symbol">
-                        <option disabled selected>GK</option>
-                        <option value="messi">Messi</option>
-                    </select>
-                </div>
+            <div class="tate wide">
+                <img src="{{ image11 }}">
+                <select class="form-select mx-auto w-auto" name="symbol11">
+                    <option disabled selected>GK</option>
+                    {% for player in squad %}
+                        <option value="{{ player.name }}">{{ player.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="btn btn-primary" type="submit">SELECT!</button>
             </div>
+
         </form>
-        <script type="text/javascript">
 
-            let img = document.getElementById("image_place");
-
-            let idx = 1;
-
-            function upImage()
-            {
-                img.src = "{{ image }}"
-            }
-
-        </script>
 {% endblock %}
