@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, request, redirect
 from cs50 import SQL
 from datetime import timedelta
-from helperFunction import login_required, sorry
+from helperFunction import login_required, sorry, calculate433
 from werkzeug.security import check_password_hash, generate_password_hash
 
 
@@ -119,7 +119,11 @@ def register():
 @login_required
 def create433():
     if request.method == "GET":
+        for i in range(20):
+            squadlist[i] = ""
+
         squad = db.execute("SELECT * FROM players LIMIT 40")  # ！！！！ここは後で改善
+
         check = db.execute("SELECT * FROM squads WHERE username = ?", session["user_id"])
         if len(check) == 0:
             for i in range(40):
@@ -131,18 +135,47 @@ def create433():
 @login_required
 def set_squad433():
     if request.method == "POST":
-
         mysquad = db.execute("SELECT * FROM squads WHERE username = ?", session["user_id"])
         for i in range(20):  # 11人なので11にしようと思ったらなぜかout of rangeでたので多めにしてる
             if request.form.get("symbol{num}".format(num=i)):
-                imagedict = db.execute("SELECT image FROM players WHERE name = ?",
+                imagedict = db.execute("SELECT name, image FROM players WHERE name = ?",
                                        request.form.get("symbol{num}".format(num=i)))
                 squadlist[i-1] = imagedict[0]['image']
 
-        return render_template("create433.html", squad=mysquad, image1=squadlist[0], image2=squadlist[1],
-                               image3=squadlist[2], image4=squadlist[3], image5=squadlist[4], image6=squadlist[5],
-                               image7=squadlist[6], image8=squadlist[7], image9=squadlist[8], image10=squadlist[9],
-                               image11=squadlist[10])
+        current_squad = []
+
+        if squadlist.count('') == 9:  # squadlistは長さ20にしてるので、9個空白が残れば11人入ってる
+            for i in range(11):
+                squad_temp = db.execute("SELECT * FROM players WHERE image = ?", squadlist[i])
+                current_squad.append(squad_temp[0])
+        print(current_squad)
+        if len(current_squad) != 11:  # 未入力の場合戻る
+            return render_template("create433.html", squad=mysquad, image1=squadlist[0], image2=squadlist[1],
+                                   image3=squadlist[2], image4=squadlist[3], image5=squadlist[4], image6=squadlist[5],
+                                   image7=squadlist[6], image8=squadlist[7], image9=squadlist[8], image10=squadlist[9],
+                                   image11=squadlist[10])
+        idList = []
+        for i in range(11):
+            getId = current_squad[i]["id"]
+            idList.append(getId)
+
+        if len(idList) != len(set(idList)):  # 重複があればやり直し
+            return render_template("create433.html", squad=mysquad, image1=squadlist[0], image2=squadlist[1],
+                                   image3=squadlist[2], image4=squadlist[3], image5=squadlist[4], image6=squadlist[5],
+                                   image7=squadlist[6], image8=squadlist[7], image9=squadlist[8], image10=squadlist[9],
+                                   image11=squadlist[10], message="There is a duplicate!")
+        else:
+            add = calculate433(current_squad)
+            total = add
+            for i in range(len(current_squad)):  # スコア計算
+                oa = current_squad[i]["oa"]
+                pt = current_squad[i]["pt"]
+                total += int((oa + pt) / 2)
+
+            return render_template("create433.html", squad=mysquad, image1=squadlist[0], image2=squadlist[1],
+                                   image3=squadlist[2], image4=squadlist[3], image5=squadlist[4], image6=squadlist[5],
+                                   image7=squadlist[6], image8=squadlist[7], image9=squadlist[8], image10=squadlist[9],
+                                   image11=squadlist[10], total=total, add=add)
 
     return render_template("register.html")
 

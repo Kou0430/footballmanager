@@ -1,9 +1,12 @@
 from cs50 import SQL
 
-li = [""] * 11
-print(li)
+db = SQL("sqlite:///playersData.db")
 
-for i in range(11):
-    li[i] = "{i}".format(i=i)
-
-print(li)
+squad = db.execute("SELECT * FROM players LIMIT 5")
+print(squad)
+for i in range(len(squad)):
+    if i == 0:
+        if "CM" in squad[i]["position"]:
+            print("CM")
+        elif "CAM" in squad[i]["position"]:
+            print("CAM")

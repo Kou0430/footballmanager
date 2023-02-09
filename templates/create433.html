@@ -6,138 +6,145 @@
 
 {% block main %}
 
-        <form action="/create433" method="post">
-            <div class="w-50 mb-5 mt-5 yoko wide">
-                <div class="tate wide">
-                    <img src="{{ image1 }}">
-                    <select class="form-select mx-auto w-auto" name="symbol1">
-                        <option disabled selected>FW</option>
-                        {% for player in squad %}
-                            <option value="{{ player.name }}">{{ player.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="btn btn-primary" type="submit">SELECT!</button>
-                </div>
+    <form action="/create433" method="post">
 
+        <div class="button1001">
+            <button type="submit" id="score" name="score" class="getbutton">GET YOUR SCORE!</button>
+        </div>
+        <p>{{ message }} {{ total }} {{ add }}</p>
 
-                <div class="tate wide">
-                    <img src="{{ image2 }}">
-                    <select class="form-select mx-auto w-auto" name="symbol2">
-                        <option disabled selected>FW</option>
-                        {% for player in squad %}
-                            <option value="{{ player.name }}">{{ player.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="btn btn-primary" type="submit">SELECT!</button>
-                </div>
-
-                <div class="tate wide">
-                    <img src="{{ image3 }}">
-                    <select class="form-select mx-auto w-auto" name="symbol3">
-                        <option disabled selected>FW</option>
-                        {% for player in squad %}
-                            <option value="{{ player.name }}">{{ player.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="btn btn-primary" type="submit">SELECT!</button>
-                </div>
-
-            </div>
-
-
-            <div class="w-50 py-5 yoko wide">
-                <div class="tate wide">
-                    <img src="{{ image4 }}">
-                    <select class="form-select mx-auto w-auto" name="symbol4">
-                        <option disabled selected>MF</option>
-                        {% for player in squad %}
-                            <option value="{{ player.name }}">{{ player.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="btn btn-primary" type="submit">SELECT!</button>
-                </div>
-
-                <div class="tate wide">
-                    <img src="{{ image5 }}">
-                    <select class="form-select mx-auto w-auto" name="symbol5">
-                        <option disabled selected>MF</option>
-                        {% for player in squad %}
-                            <option value="{{ player.name }}">{{ player.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="btn btn-primary" type="submit">SELECT!</button>
-                </div>
-
-                <div class="tate wide">
-                    <img src="{{ image6 }}">
-                    <select class="form-select mx-auto w-auto" name="symbol6">
-                        <option disabled selected>MF</option>
-                        {% for player in squad %}
-                            <option value="{{ player.name }}">{{ player.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="btn btn-primary" type="submit">SELECT!</button>
-                </div>
-            </div>
-
-
-            <div class="w-75 mt-5 mb-5 yoko wide">
-                <div class="tate wide">
-                    <img src="{{ image7 }}">
-                    <select class="form-select mx-auto w-auto" name="symbol7">
-                        <option disabled selected>DF</option>
-                        {% for player in squad %}
-                            <option value="{{ player.name }}">{{ player.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="btn btn-primary" type="submit">SELECT!</button>
-                </div>
-
-                <div class="tate wide">
-                    <img src="{{ image8 }}">
-                    <select class="form-select mx-auto w-auto" name="symbol8">
-                        <option disabled selected>DF</option>
-                        {% for player in squad %}
-                            <option value="{{ player.name }}">{{ player.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="btn btn-primary" type="submit">SELECT!</button>
-                </div>
-
-                <div class="tate wide">
-                    <img src="{{ image9 }}">
-                    <select class="form-select mx-auto w-auto" name="symbol9">
-                        <option disabled selected>DF</option>
-                        {% for player in squad %}
-                            <option value="{{ player.name }}">{{ player.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="btn btn-primary" type="submit">SELECT!</button>
-                </div>
-
-                <div class="tate wide">
-                    <img src="{{ image10 }}">
-                    <select class="form-select mx-auto w-auto" name="symbol10">
-                        <option disabled selected>DF</option>
-                        {% for player in squad %}
-                            <option value="{{ player.name }}">{{ player.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="btn btn-primary" type="submit">SELECT!</button>
-                </div>
-
-            </div>
-
+        <div class="w-50 mb-5 mt-5 yoko wide">
             <div class="tate wide">
-                <img src="{{ image11 }}">
-                <select class="form-select mx-auto w-auto" name="symbol11">
-                    <option disabled selected>GK</option>
+                <img src="{{ image1 }}">
+                <select class="form-select mx-auto w-auto" name="symbol1">
+                    <option disabled selected>FW</option>
                     {% for player in squad %}
                         <option value="{{ player.name }}">{{ player.name }}</option>
                     {% endfor %}
                 </select>
-                <button class="btn btn-primary" type="submit">SELECT!</button>
+                <button class="getbutton" type="submit">SELECT!</button>
             </div>
+
+
+            <div class="tate wide">
+                <img src="{{ image2 }}">
+                <select class="form-select mx-auto w-auto" name="symbol2">
+                    <option disabled selected>FW</option>
+                    {% for player in squad %}
+                        <option value="{{ player.name }}">{{ player.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="getbutton" type="submit">SELECT!</button>
+            </div>
+
+            <div class="tate wide">
+                <img src="{{ image3 }}">
+                <select class="form-select mx-auto w-auto" name="symbol3">
+                    <option disabled selected>FW</option>
+                    {% for player in squad %}
+                        <option value="{{ player.name }}">{{ player.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="getbutton" type="submit">SELECT!</button>
+            </div>
+
+        </div>
+
+
+        <div class="w-50 py-5 yoko wide">
+            <div class="tate wide">
+                <img src="{{ image4 }}">
+                <select class="form-select mx-auto w-auto" name="symbol4">
+                    <option disabled selected>MF</option>
+                    {% for player in squad %}
+                        <option value="{{ player.name }}">{{ player.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="getbutton" type="submit">SELECT!</button>
+            </div>
+
+            <div class="tate wide">
+                <img src="{{ image5 }}">
+                <select class="form-select mx-auto w-auto" name="symbol5">
+                    <option disabled selected>MF</option>
+                    {% for player in squad %}
+                        <option value="{{ player.name }}">{{ player.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="getbutton" type="submit">SELECT!</button>
+            </div>
+
+            <div class="tate wide">
+                <img src="{{ image6 }}">
+                <select class="form-select mx-auto w-auto" name="symbol6">
+                    <option disabled selected>MF</option>
+                    {% for player in squad %}
+                        <option value="{{ player.name }}">{{ player.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="getbutton" type="submit">SELECT!</button>
+            </div>
+        </div>
+
+
+        <div class="w-75 mt-5 mb-5 yoko wide">
+            <div class="tate wide">
+                <img src="{{ image7 }}">
+                <select class="form-select mx-auto w-auto" name="symbol7">
+                    <option disabled selected>DF</option>
+                    {% for player in squad %}
+                        <option value="{{ player.name }}">{{ player.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="getbutton" type="submit">SELECT!</button>
+            </div>
+
+            <div class="tate wide">
+                <img src="{{ image8 }}">
+                <select class="form-select mx-auto w-auto" name="symbol8">
+                    <option disabled selected>DF</option>
+                    {% for player in squad %}
+                        <option value="{{ player.name }}">{{ player.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="getbutton" type="submit">SELECT!</button>
+            </div>
+
+            <div class="tate wide">
+                <img src="{{ image9 }}">
+                <select class="form-select mx-auto w-auto" name="symbol9">
+                    <option disabled selected>DF</option>
+                    {% for player in squad %}
+                        <option value="{{ player.name }}">{{ player.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="getbutton" type="submit">SELECT!</button>
+            </div>
+
+            <div class="tate wide">
+                <img src="{{ image10 }}">
+                <select class="form-select mx-auto w-auto" name="symbol10">
+                    <option disabled selected>DF</option>
+                    {% for player in squad %}
+                        <option value="{{ player.name }}">{{ player.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="getbutton" type="submit">SELECT!</button>
+            </div>
+
+        </div>
+
+        <div class="tate wide">
+            <img src="{{ image11 }}">
+            <select class="form-select mx-auto w-auto" name="symbol11">
+                <option disabled selected>GK</option>
+                {% for player in squad %}
+                    <option value="{{ player.name }}">{{ player.name }}</option>
+                {% endfor %}
+            </select>
+            <button class="getbutton" type="submit">SELECT!</button>
+        </div>
+
 
         </form>
 
